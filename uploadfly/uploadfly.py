@@ -6,7 +6,7 @@ import os
 
 import requests
 
-from utils.types import File
+from .utils.types import File
 
 
 class UploadflyClient:
@@ -60,7 +60,7 @@ class UploadflyClient:
                 raise Exception(f"{filename} failed to upload")
             return response.json()
         except Exception as e:
-            raise Exception(f"An error occurred during file upload. {e.message}")
+            raise Exception(f"An error occurred during file upload. {str(e)}")
 
     def delete(self, file_url: str):
         """delete file
@@ -84,13 +84,13 @@ class UploadflyClient:
         data = {"file_url": file_url}
         try:
             response = requests.delete(
-                f"{self.BASE_URL}/delete", data=data, headers=headers
+                f"{self.BASE_URL}/delete", json=data, headers=headers
             )
             if not response.ok:
                 raise Exception(f"Failed to delete {file_url}")
             return response.json()
         except Exception as e:
-            raise Exception(f"An error occurred during file deletion. {e.message}")
+            raise Exception(f"An error occurred during file deletion. {str(e)}")
 
     def image_upload(
         self,
@@ -146,4 +146,4 @@ class UploadflyClient:
                 raise Exception(f"{filename} failed to upload")
             return response.json()
         except Exception as e:
-            raise Exception(f"An error occurred during file upload. {e.message}")
+            raise Exception(f"An error occurred during file upload. {str(e)}")
