@@ -49,11 +49,11 @@ pip install uploadfly
 - Deletes a file from the Uploadfly cloud.
 - **Parameters:**
   - `file_url` (string): The URL of the file to be deleted.
-  - **Returns:**
-    - A Promise that resolves with the response from the Uploadfly API.
-  - **Throws:**
-    - `Exception`: If the `file_url` parameter is not provided or if the file deletion fails.
-    - `Exception`: If an error occurs during the file deletion process.
+- **Returns:**
+  - response from the Uploadfly API.
+- **Throws:**
+  - `Exception`: If the `file_url` parameter is not provided or if the file deletion fails.
+  - `Exception`: If an error occurs during the file deletion process.
 
 ## Example Usage
 
