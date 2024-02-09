@@ -6,7 +6,7 @@ import os
 
 import requests
 
-from utils.types import UploadConfig, ImageUploadConfig, File
+from utils.types import File
 
 
 class UploadflyClient:
@@ -27,12 +27,12 @@ class UploadflyClient:
             raise Exception("An API key is required.")
         self.api_key = api_key
 
-    def upload(self, file: File, config: UploadConfig = {}):
+    def upload(self, file: File, /, *, filename: str = None):
         """Upload file to uploadfly
 
         Args:
-            file (File): file to be uploaded. Can be a string(path to file) or a ReadableBuffer``
-            config (`{ "filename": "filename" }`, optional): Config dictionary. Defaults to {}.
+            file (File): file to be uploaded. Can be a string(path to file) or a BufferedReader``
+            filename (string): custom name of file
 
         Raises:
             Exception: If file not passed
@@ -48,7 +48,7 @@ class UploadflyClient:
             if not os.path.exists(file):
                 raise Exception("File Does not exist.")
             file = open(file, "rb")
-        filename = config.get("filename", file.name)
+        filename = filename or file.name
         files = {"file": (filename, file), "filename": (None, filename)}
         headers = {"Authorization": f"Bearer {self.api_key}"}
         try:
@@ -92,12 +92,24 @@ class UploadflyClient:
         except Exception as e:
             raise Exception(f"An error occurred during file deletion. {e.message}")
 
-    def image_upload(self, file: File, config: ImageUploadConfig = {}):
+    def image_upload(
+        self,
+        file: File,
+        /,
+        *,
+        filename: str = None,
+        max_file_size: str = None,
+        width: int = None,
+        height: int = None,
+    ):
         """Image upload
 
         Args:
             file (File): file to upload
-            config (ImageUploadConfig, optional): has properties like: filename, maxFileSize, width, height. Defaults to {}.
+            filename (string): file name
+            max_file_size (string): max file size
+            width (int): width
+            height (int): height
 
         Raises:
             Exception: If file is not passed
@@ -113,10 +125,10 @@ class UploadflyClient:
             if not os.path.exists(file):
                 raise Exception("File Does not exist.")
             file = open(file, "rb")
-        filename = config.get("filename", file.name)
-        max_file_size = config.get("max_file_size", "")
-        width = config.get("width", "").__str__()
-        height = config.get("height", "").__str__()
+        filename = filename or file.name
+        max_file_size = max_file_size or ""
+        width = width or ""
+        height = height or ""
         files = {
             "file": (filename, file),
             "filename": (None, filename),
