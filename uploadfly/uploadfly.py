@@ -3,6 +3,7 @@
         declares `UploadflyClient` class
 """
 import os
+import io
 
 import requests
 
@@ -44,6 +45,8 @@ class UploadflyClient:
         """
         if not file:
             raise Exception("A file is required.")
+        if not isinstance(file, str) and not isinstance(file, io.BufferedReader):
+            raise Exception("File must be a string or BufferedReader")
         if isinstance(file, str):
             if not os.path.exists(file):
                 raise Exception("File Does not exist.")
@@ -121,6 +124,8 @@ class UploadflyClient:
         """
         if not file:
             raise Exception("A file is required.")
+        if not isinstance(file, str) and not isinstance(file, io.BufferedReader):
+            raise Exception("File must be a string or BufferedReader")
         if isinstance(file, str):
             if not os.path.exists(file):
                 raise Exception("File Does not exist.")
