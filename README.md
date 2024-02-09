@@ -62,7 +62,7 @@ pip install uploadfly
 ```python
 from uploadfly import UploadflyClient
 
-uploadfly = UploadClient('your-api-key')
+uploadfly = UploadflyClient('your-api-key')
 
 
 # upload with BufferedReader
@@ -71,7 +71,7 @@ try:
     response = uploadfly.upload(file, filename='custom-filename')
     print('file uploaded', response)
 except Exception as e:
-    print('error uploading file', e.message)
+    print('error uploading file', str(e))
 
 # upload with file path
 file = 'path/to/file'
@@ -79,7 +79,7 @@ try:
     response = uploadfly.upload(file, filename='custom-filename')
     print('file uploaded', response)
 except Exception as e:
-    print('error uploading file', e.message)
+    print('error uploading file', str(e))
 ```
 
 ### Delete files
@@ -91,5 +91,5 @@ try:
     response = uploadfly.delete(file_url)
     print('file deleted', response)
 except Exception as e:
-    print('error deleting file', e.message)
+    print('error deleting file', str(e))
 ```
