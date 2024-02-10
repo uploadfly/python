@@ -38,6 +38,7 @@ class UploadflyClient:
         Raises:
             Exception: If file not passed
             Exception: If file path passed does not exist
+            Exception: If filename passed and filename is not a string
             Exception: If file upload failed
 
         Returns:
@@ -51,6 +52,9 @@ class UploadflyClient:
             if not os.path.exists(file):
                 raise Exception("File Does not exist.")
             file = open(file, "rb")
+        if filename and not isinstance(filename, str):
+            file.close()
+            raise Exception("filename must be of type string")
         filename = filename or file.name
         files = {"file": (filename, file), "filename": (None, filename)}
         headers = {"Authorization": f"Bearer {self.api_key}"}
@@ -73,6 +77,7 @@ class UploadflyClient:
 
         Raises:
             Exception: If file url is not provided
+            Exception: If file url is not a string
             Exception: If an error occurred during file deletion
 
         Returns:
@@ -80,6 +85,8 @@ class UploadflyClient:
         """
         if not file_url:
             raise Exception("A file url must be provided")
+        if not isinstance(file_url, str):
+            raise Exception("file_url must be of type string")
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
@@ -117,6 +124,7 @@ class UploadflyClient:
         Raises:
             Exception: If file is not passed
             Exception: If file path passed does not exist
+            Exception: If optional arguments are not passed in the correct type
             Exception: An error occurred during image upload
 
         Returns:
@@ -130,6 +138,18 @@ class UploadflyClient:
             if not os.path.exists(file):
                 raise Exception("File Does not exist.")
             file = open(file, "rb")
+        if filename and not isinstance(filename, str):
+            file.close()
+            raise Exception("filename must be of type string")
+        if max_file_size and not isinstance(max_file_size, str):
+            file.close()
+            raise Exception("max_file_size must be of type string")
+        if width and not isinstance(width, int):
+            file.close()
+            raise Exception("width must be of type int")
+        if height and not isinstance(height, int):
+            file.close()
+            raise Exception("height must be of type int")
         filename = filename or file.name
         max_file_size = max_file_size or ""
         width = width or ""
