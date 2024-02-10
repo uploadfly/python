@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Types for uploadfly client
 """
-from typing import TypeAlias, Union
+from typing import Union
 import io
 
 
-File: TypeAlias = Union[io.BufferedReader, str]
+File = Union[io.BufferedReader, str]

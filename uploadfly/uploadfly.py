@@ -28,7 +28,7 @@ class UploadflyClient:
             raise Exception("An API key is required.")
         self.api_key = api_key
 
-    def upload(self, file: File, /, *, filename: str = None):
+    def upload(self, file: File, filename: str = None):
         """Upload file to uploadfly
 
         Args:
@@ -105,8 +105,6 @@ class UploadflyClient:
     def image_upload(
         self,
         file: File,
-        /,
-        *,
         filename: str = None,
         max_file_size: str = None,
         width: int = None,
