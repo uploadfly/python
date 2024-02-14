@@ -1,0 +1,31 @@
+[project]
+name = "uploadfly"
+version = "1.0.0"
+authors = [{ name = "Emmanuel Nwafor", email = "nwaforemmanuel005@gmail.com" }]
+description = "UploadFly Python SDK"
+classifiers = [
+    "Environment :: Plugins",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: ISC License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["uploadfly", "python", "sdk"]
+requires-python = ">=3.7"
+dependencies = ["requests"]
+
+[project.license]
+text = "ISC License"
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.urls]
+"Homepage" = "https://github.com/uploadfly/python"
+"Bug Tracker" = "https://github.com/uploadfly/python/issues"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
